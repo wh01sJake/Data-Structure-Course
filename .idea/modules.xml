@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/week1lab/ArrayListExample/ArrayListExample.iml" filepath="$PROJECT_DIR$/week1lab/ArrayListExample/ArrayListExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Data Structure.iml" filepath="$PROJECT_DIR$/Data Structure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week1lab/week1lab.iml" filepath="$PROJECT_DIR$/week1lab/week1lab.iml" />
+    </modules>
+  </component>
+</project>
