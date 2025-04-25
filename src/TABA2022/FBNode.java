@@ -1,16 +1,13 @@
 package TABA2022;
 
-public class FBNode<T> implements Comparable<FBNode<T>> {
-    FBTeam team;
-    FBNode<T> left;
-    FBNode<T> right;
+public class FBNode<T>  {
+    protected T team;
+    protected FBNode<T> left;
+    protected FBNode<T> right;
 
-    @Override
-    public int compareTo(FBNode<T> o) {
-        return this.team.compareTo(o.team);
-    }
 
-    public FBNode(FBTeam team) {
+
+    public FBNode(T team) {
         this.team = team;
         this.left = null;
         this.right = null;
@@ -18,6 +15,9 @@ public class FBNode<T> implements Comparable<FBNode<T>> {
 
     @Override
     public String toString() {
-        return team.toString();
+        String leftVal = (left == null ? "NULL" : left.team.toString());
+        String rightVal = (right == null ? "NULL" : right.team.toString());
+
+        return  "[Current Team] " + team + "\n[left]" + leftVal + "\n[right]" + rightVal +"\n";
     }
 }

@@ -199,8 +199,8 @@ public class KiethBinaryTree<T extends Comparable<T>> implements BinaryTree<T> {
             /*
                 T maxValue = findMax(toRemove.right);
                 System.out.println("maxValue = " + maxValue);
-                BTNode<T> replacement = findNode(maxValue);
-                BTNode<T> replacementParent = findParent(maxValue);
+                TABA2022.solution.BTNode<T> replacement = findNode(maxValue);
+                TABA2022.solution.BTNode<T> replacementParent = findParent(maxValue);
           */
 
             // we dont actually change the value of the Node we simply

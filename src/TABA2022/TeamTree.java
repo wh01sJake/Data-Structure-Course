@@ -9,7 +9,7 @@ public interface TeamTree<T extends Comparable<T>> {
 
     int size();
 
-    FBNode<FBTeam> findMin();
+    FBNode<T> findMin();
 
-    FBNode<FBTeam> findMax();
+    FBNode<T> findMax();
 }

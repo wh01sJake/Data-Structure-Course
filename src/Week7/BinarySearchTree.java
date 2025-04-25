@@ -77,11 +77,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
         return node.data;
     }
 
-    @Override
-    public String toString() {
-        if (root == null) return "Empty Tree";
-        return root.treeToString(new StringBuilder(), true, new StringBuilder()).toString();
-    }
+
 
 
     @Override
@@ -131,7 +127,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
         return isRemoved[0];
     }
 
-    private BTNode<T> removeHelper(T element, BTNode<T> current, boolean[] isRemoved) {
+    private TABA2022.solution.BTNode<T> removeHelper(T element, TABA2022.solution.BTNode<T> current, boolean[] isRemoved) {
         // different cases when remove
         // case 1: removing node has no child
         // case 2 : removing node has one child
@@ -161,7 +157,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
             // processing with two children case
             else {
                 // find the min node in the right tree
-                BTNode<T> mindNode = findMinValue(current.right);
+                TABA2022.solution.BTNode<T> mindNode = findMinValue(current.right);
                 current.data = mindNode.data;
                 current.right = removeHelper(mindNode.data,current.right,isRemoved);
             }
@@ -213,13 +209,28 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
 
         // case3: target has two child, find the min node in right subtree and replace it.
         else {
-            BTNode<T> replace = findMinValue(target);
+            BTNode<T> replace = findMinValue(target.right);
 
             T replaceData = replace.data;
-            //simplify the case to 1 or 2.
-            remove(replaceData);
+
+            BTNode<T> replacedParent = findParent(replaceData,root);
+
+//            //simplify the case to 1 or 2.
+//            remove(replaceData);
+
+
+            if (replacedParent.left == replace){
+                replacedParent.left = replace.right;
+            }
+            else {
+                replacedParent.right = replace.right;
+
+            }
+
             //replace the data of target
             target.data = replaceData;
+
+
         }
 
         return true;
@@ -261,6 +272,23 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
         }
         // not match or root
         return null;
+
+
+    }
+
+    public void inOrder(){
+
+        inOrder(root);
+    }
+
+    private void inOrder(BTNode<T> current){
+        if (current== null){
+            return;
+        }
+
+        inOrder(current.left);
+        System.out.print(current);
+        inOrder(current.right);
     }
 
     public static void main(String[] args) {
@@ -270,9 +298,17 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinaryTree<T> 
         numbers.insert(6);
         numbers.insert(5);
         numbers.insert(8);
+        numbers.insert(7);  // Add 7 as the right child of 5
         numbers.insert(34);
         numbers.insert(100);
         numbers.insert(2);
-        System.out.println(numbers);
+
+        numbers.inOrder();
+
+        numbers.remove(4);
+        System.out.println("--------------------------");
+        numbers.inorder();
+
+
     }
 }

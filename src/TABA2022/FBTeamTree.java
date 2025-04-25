@@ -2,8 +2,9 @@ package TABA2022;
 
 import Week7.EmptyTreeException;
 
-public class FBTeamTree implements TeamTree<FBTeam> {
-    protected FBNode<FBTeam> root;
+public class FBTeamTree <T extends Comparable<T>> implements TeamTree<T> {
+
+    protected FBNode<T> root;
 
     @Override
     public boolean isEmpty() {
@@ -11,15 +12,15 @@ public class FBTeamTree implements TeamTree<FBTeam> {
     }
 
     @Override
-    public void insert(FBTeam team) {
+    public void insert(T team) {
 
         root = insert(root, team);
 
     }
 
-    public FBNode<FBTeam> insert(FBNode<FBTeam> current, FBTeam team){
+    public FBNode<T> insert(FBNode<T> current, T team){
         if (current == null){
-            return  new FBNode<>(team);
+            return  new FBNode<T>(team);
         }
 
         int result = (team.compareTo(current.team));
@@ -42,7 +43,7 @@ public class FBTeamTree implements TeamTree<FBTeam> {
         return size(root);
     }
 
-    public int size(FBNode<FBTeam> current){
+    public int size(FBNode<T> current){
         if (current == null){
             return 0;
         }
@@ -52,7 +53,7 @@ public class FBTeamTree implements TeamTree<FBTeam> {
     }
 
     @Override
-    public FBNode<FBTeam> findMin() {
+    public FBNode<T> findMin() {
         if (isEmpty()){
             throw  new EmptyTreeException();
         }
@@ -61,7 +62,7 @@ public class FBTeamTree implements TeamTree<FBTeam> {
 
     }
 
-    public FBNode<FBTeam> findMin(FBNode<FBTeam> current){
+    public FBNode<T> findMin(FBNode<T> current){
         while (current.left!= null){
             current= current.left;
         }
@@ -69,7 +70,7 @@ public class FBTeamTree implements TeamTree<FBTeam> {
     }
 
     @Override
-    public FBNode<FBTeam> findMax() {
+    public FBNode<T> findMax() {
         if (isEmpty()){
             throw new EmptyTreeException();
         }
@@ -77,37 +78,32 @@ public class FBTeamTree implements TeamTree<FBTeam> {
         return findMax(root);
     }
 
-    public FBNode<FBTeam> findMax(FBNode<FBTeam> current){
+    public FBNode<T> findMax(FBNode<T> current){
         while (current.right!= null){
             current= current.right;
         }
         return current;
     }
 
-    @Override
-    public String toString() {
-        if (isEmpty()) {
-            return "Empty Tree";
-        }
-        StringBuilder sb = new StringBuilder();
-        inorderToString(root, sb);
-        return sb.toString().trim();
+    public void inOrder(){
 
+        inOrder(root);
     }
 
-    private void inorderToString(FBNode<FBTeam> node, StringBuilder sb) {
-        if (node == null) {
+    public void inOrder(FBNode<T> current){
+        if (current == null){
             return;
         }
-        inorderToString(node.left, sb);
-        sb.append(node.team.toString()).append("\n");
-        inorderToString(node.right, sb);
+
+        inOrder(current.left);
+        System.out.println(current);
+        inOrder(current.right);
 
     }
 
 
     public static void main(String[] args) {
-        FBTeamTree tree = new FBTeamTree();
+        FBTeamTree<FBTeam> tree = new FBTeamTree<>();
         tree.insert(new FBTeam("Team A", 1000000, 1));
         tree.insert(new FBTeam("Team B", 2000000, 2));
         tree.insert(new FBTeam("Team C", 3000000, 3));
@@ -116,7 +112,7 @@ public class FBTeamTree implements TeamTree<FBTeam> {
         System.out.println("min position: " +tree.findMin());
         System.out.println("max position: " +tree.findMax());
 
-        System.out.println(tree);
+        tree.inOrder();
 
     }
 
